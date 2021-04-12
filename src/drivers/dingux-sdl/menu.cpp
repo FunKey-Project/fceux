@@ -17,7 +17,7 @@
 #include "dface.h"
 
 #include "menu.h"
-#include "configfile.h"
+#include "configfile_fk.h"
 
 #include "../common/configSys.h"
 #include <SDL/SDL_ttf.h>

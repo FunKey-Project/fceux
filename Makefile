@@ -207,7 +207,7 @@ GUI_OBJS = \
 	$(SRC)drivers/dingux-sdl/gui/file_list.o \
 	$(SRC)drivers/dingux-sdl/gui/font.o
 
-DRIVER_OBJS = $(SRC)drivers/dingux-sdl/config.o $(SRC)drivers/dingux-sdl/configfile.o \
+DRIVER_OBJS = $(SRC)drivers/dingux-sdl/config.o $(SRC)drivers/dingux-sdl/configfile_fk.o \
 	$(SRC)drivers/dingux-sdl/input.o \
 	$(SRC)drivers/dingux-sdl/dingoo.o $(SRC)drivers/dingux-sdl/dingoo-joystick.o \
 	$(SRC)drivers/dingux-sdl/dingoo-throttle.o $(SRC)drivers/dingux-sdl/dingoo-sound.o \
