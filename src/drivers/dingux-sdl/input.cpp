@@ -332,6 +332,8 @@ static void KeyboardCommands() {
 		fp_tmp = popen(shell_cmd_tmp, "r");
 		if (fp_tmp == NULL) {
 			printf("Failed to run command %s\n", shell_cmd_tmp);
+		} else {
+		    pclose(fp_tmp);
 		}
 
       // Save config file
