@@ -29,7 +29,7 @@
 #include "dingoo-video.h"
 #include "dingoo.h"
 #include "menu.h"
-#include "configfile.h"
+#include "configfile_fk.h"
 
 #include "gui/gui.h"
 
