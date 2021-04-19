@@ -58,10 +58,11 @@ void delay_us(uint64 us_count)
 void RefreshThrottleFPS()
 {
     uint64 fps = FCEUI_GetDesiredFPS(); // Do >> 24 to get in Hz
-    desired_frametime = 16777216.0l / (fps * g_fpsScale);
+    //desired_frametime = 16777216.0l / (fps * g_fpsScale);
+    desired_frametime = 20132659.0l / (fps * g_fpsScale);
     desired_frametime_us = (uint64)(desired_frametime * 1000000.0l);
 
-    Lasttime=0;   
+    Lasttime=0;
     Nexttime=0;
     InFrame=0;
     printf("desired_frametime: %i\n", desired_frametime_us);
@@ -80,30 +81,30 @@ int SpeedThrottle()
     }
     uint64 time_left;
     uint64 cur_time;
-    
+
     if(!Lasttime) Lasttime = get_ticks_us();
-    
+
     if(!InFrame) {
         InFrame = 1;
         Nexttime = Lasttime + desired_frametime_us;
     }
-    
+
     cur_time  = get_ticks_us();
 
     if(cur_time >= Nexttime)
         time_left = 0;
     else
         time_left = Nexttime - cur_time;
-    
+
     if(time_left > 50000) {
         time_left = 50000;
         /* In order to keep input responsive, don't wait too long at once */
         /* 50 ms wait gives us a 20 Hz responsetime which is nice. */
     } else InFrame = 0;
-    
+
     //printf("attempting to sleep %Ld ms, frame complete=%i\n", time_left, InFrame);
     delay_us(time_left);
-    
+
     if(!InFrame)
     {
         Lasttime = get_ticks_us();
@@ -119,11 +120,11 @@ void IncreaseEmulationSpeed(void)
 {
 puts("IncreaseEmulationSpeed");
     g_fpsScale *= LOGMUL;
-    
+
     if(g_fpsScale > Fastest) g_fpsScale = Fastest;
 
     RefreshThrottleFPS();
-     
+
     FCEU_DispMessage("emulation speed %.1f%%", g_fpsScale*100.0);
 }
 
@@ -150,7 +151,7 @@ FCEUD_SetEmulationSpeed(int cmd)
 {
 puts("SetEmulationSpeed");
     MaxSpeed = false;
-    
+
     switch(cmd) {
     case EMUSPEED_SLOWEST:
         g_fpsScale = Slowest;

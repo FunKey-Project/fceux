@@ -22,7 +22,7 @@
 /// \brief Handles sound emulation using the SDL.
 
 #include <stdio.h>
-#include <string.h> 
+#include <string.h>
 #include <stdlib.h>
 
 #include "dingoo.h"
@@ -67,14 +67,14 @@ static void fillaudio(void *udata, uint8 *stream, int len) // len == spec.sample
 
         *tmps = sample;
         tmps++;
-        len--; 
+        len--;
     }
 }
 
 /**
  * Initialize the audio subsystem.
  */
-int InitSound() 
+int InitSound()
 {
     int sound, soundrate, soundbufsize, soundvolume, soundtrianglevolume,
             soundsquare1volume, soundsquare2volume, soundnoisevolume,
@@ -94,7 +94,7 @@ int InitSound()
     }
     char driverName[8];
     SDL_AudioDriverName(driverName, 8);
-    
+
     fprintf(stderr, "Loading SDL sound with %s driver...\n", driverName);
 
     // load configuration variables
@@ -179,7 +179,7 @@ uint32 GetBufferedSound(void) {
 /**
  * Send a sound clip to the audio subsystem.
  */
-void WriteSound(int32 *buf, int Count) 
+void WriteSound(int32 *buf, int Count)
 {
     //extern int EmulationPaused;
     // if(ispressed(DINGOO_L)) {
@@ -196,19 +196,14 @@ void WriteSound(int32 *buf, int Count)
             s_Buffer[s_BufferWrite] = *buf;
             Count--;
             s_BufferWrite = (s_BufferWrite + 1) % s_BufferSize;
-            
+
             s_BufferIn++;
-            
+
             buf++;
         }
     }
 _exit:
     SDL_UnlockAudio();
-
-    // If we have too much audio, wait a bit before accepting more.
-    // This keeps the lag in check.
-    while (GetBufferedSound() > 3 * GetBufferSize())
-        usleep(1000);
 }
 
 /**
@@ -218,7 +213,7 @@ void SilenceSound(int n)
 {
     // Not needed, the callback will write silence to buffer anyway
     // otherwise it causes noticable lag
-    SDL_PauseAudio(n);  
+    SDL_PauseAudio(n);
 }
 
 /**

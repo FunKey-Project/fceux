@@ -317,9 +317,9 @@ void flip_NNOptimized_AllowOutOfScreen(SDL_Surface *src_surface, SDL_Surface *ds
 			continue;
 		}
 
-		uint16_t *t = (uint16_t *) (dst_surface->pixels + ((i + y_padding) * ((w2 > RES_HW_SCREEN_HORIZONTAL) ? RES_HW_SCREEN_HORIZONTAL : w2)) * sizeof (uint16_t));
+		uint16_t *t = static_cast<uint16_t*>(dst_surface->pixels) + ((i + y_padding) * ((w2 > RES_HW_SCREEN_HORIZONTAL) ? RES_HW_SCREEN_HORIZONTAL : w2));
 		y2 = (i * y_ratio) >> 16;
-		uint16_t *p = (uint16_t *) (src_surface->pixels + (y2 * w1 + x_padding_ratio) * sizeof (uint16_t));
+		uint16_t *p = static_cast<uint16_t*>(src_surface->pixels) + (y2 * w1 + x_padding_ratio);
 		int rat = 0;
 		for (int j = 0; j < w2; j++) {
 			if (j >= RES_HW_SCREEN_HORIZONTAL) {
@@ -357,7 +357,7 @@ void flip_NNOptimized_AllowOutOfScreen_NES(uint8_t *nes_px, SDL_Surface *dst_sur
 			continue;
 		}
 
-		uint16_t *t = (uint16_t *) (dst_surface->pixels + ((i + y_padding) * ((w2 > RES_HW_SCREEN_HORIZONTAL) ? RES_HW_SCREEN_HORIZONTAL : w2)) * sizeof (uint16_t));
+		uint16_t *t = static_cast<uint16_t*>(dst_surface->pixels) + ((i + y_padding) * ((w2 > RES_HW_SCREEN_HORIZONTAL) ? RES_HW_SCREEN_HORIZONTAL : w2));
 		y2 = (i * y_ratio) >> 16;
 		uint8_t *p = (uint8_t *) (nes_px + (y2 * w1 + x_padding_ratio) * sizeof (uint8_t));
 		int rat = 0;
@@ -408,7 +408,7 @@ void flip_Downscale_LeftRightGaussianFilter_NES(uint8_t *nes_px, SDL_Surface *ds
 			continue;
 		}
 
-		uint16_t *t = (uint16_t *) (dst_surface->pixels + ((i + y_padding) * ((w2 > RES_HW_SCREEN_HORIZONTAL) ? RES_HW_SCREEN_HORIZONTAL : w2)) * sizeof (uint16_t));
+		uint16_t *t = static_cast<uint16_t*>(dst_surface->pixels) + ((i + y_padding) * ((w2 > RES_HW_SCREEN_HORIZONTAL) ? RES_HW_SCREEN_HORIZONTAL : w2));
 		y1 = (i * y_ratio) >> 16;
 		uint8_t *p = (uint8_t *) (nes_px + (y1 * w1 + x_padding_ratio) * sizeof (uint8_t));
 		int rat = 0;
