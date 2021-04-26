@@ -630,6 +630,9 @@ void run_menu_loop()
     stop_menu_loop = 0;
     char fname[MAXPATHLEN];
 
+    /// ------ Load default keymap ------
+    system(SHELL_CMD_KEYMAP_DEFAULT);
+
     /// ------ Get init values -------
     init_menu_system_values();
     int prevItem=menuItem;
@@ -1008,6 +1011,9 @@ void run_menu_loop()
         /// --------- reset screen refresh ---------
         screen_refresh = 0;
     }
+
+    /// ------ Restore last keymap ------
+    system(SHELL_CMD_KEYMAP_RESUME);
 
     /// ------ Reset prev key repeat params -------
     if(SDL_EnableKeyRepeat(backup_key_repeat_delay, backup_key_repeat_interval)){
