@@ -326,15 +326,9 @@ static void KeyboardCommands() {
 		aspect_ratio = (aspect_ratio+1)%NB_ASPECT_RATIOS_TYPES;
 
 		char shell_cmd_tmp[100];
-		FILE *fp_tmp;
 		sprintf(shell_cmd_tmp, "%s %d \"    DISPLAY MODE: %s\"", 
 			SHELL_CMD_NOTIF, NOTIF_SECONDS_DISP, aspect_ratio_name[aspect_ratio]);
-		fp_tmp = popen(shell_cmd_tmp, "r");
-		if (fp_tmp == NULL) {
-			printf("Failed to run command %s\n", shell_cmd_tmp);
-		} else {
-		    pclose(fp_tmp);
-		}
+		system(shell_cmd_tmp);
 
       // Save config file
       configfile_save(cfg_file_rom);
