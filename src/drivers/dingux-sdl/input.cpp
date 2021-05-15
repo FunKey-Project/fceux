@@ -327,7 +327,7 @@ static void KeyboardCommands() {
 
 		char shell_cmd_tmp[100];
 		sprintf(shell_cmd_tmp, "%s %d \"    DISPLAY MODE: %s\"", 
-			SHELL_CMD_NOTIF, NOTIF_SECONDS_DISP, aspect_ratio_name[aspect_ratio]);
+			SHELL_CMD_NOTIF_SET, NOTIF_SECONDS_DISP, aspect_ratio_name[aspect_ratio]);
 		system(shell_cmd_tmp);
 
       // Save config file
